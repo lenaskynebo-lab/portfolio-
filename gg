@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Елена Брендон</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --blue: #1346d4;
+    --red: #e0233c;
+    --white: #ffffff;
+    --cream: #f5f0e8;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--blue);
+    color: var(--white);
+    font-family: 'Manrope', sans-serif;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 20% 50%, rgba(45,111,255,0.3) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 80% at 80% 30%, rgba(10,30,100,0.5) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 0 6vw;
+    position: relative;
+    z-index: 2;
+    gap: 4vw;
+  }
+
+  .hero-left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .avatar-wrap {
+    position: relative;
+    width: clamp(260px, 38vw, 500px);
+  }
+
+  .avatar-wrap img {
+    width: 100%;
+    filter: drop-shadow(0 20px 60px rgba(0,0,0,0.4));
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(-1deg); }
+    50% { transform: translateY(-16px) rotate(1deg); }
+  }
+
+  .tag-line {
+    font-size: clamp(10px, 1.2vw, 13px);
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    opacity: 0.5;
+    margin-bottom: 1.2rem;
+  }
+
+  .hero-name {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(34px, 5vw, 76px);
+    font-weight: 900;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(13px, 1.3vw, 15px);
+    font-weight: 300;
+    opacity: 0.7;
+    line-height: 1.8;
+    max-width: 400px;
+    margin-bottom: 2rem;
+  }
+
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .pill {
+    padding: 0.35rem 1rem;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    background: rgba(255,255,255,0.05);
+  }
+
+  .tg-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.9rem 1.8rem;
+    background: var(--red);
+    color: white;
+    text-decoration: none;
+    font-family: 'Unbounded', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border-radius: 100px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 8px 30px rgba(224,35,60,0.4);
+  }
+
+  .tg-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 40px rgba(224,35,60,0.5);
+  }
+
+  /* ACCORDION SECTION */
+  .accordion-section {
+    position: relative;
+    z-index: 2;
+    padding: 0 6vw 8rem;
+  }
+
+  .section-label {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    opacity: 0.4;
+    margin-bottom: 3rem;
+  }
+
+  .accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .acc-item {
+    border: 1px solid rgba(255,255,255,0.1);
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+
+  .acc-item.active {
+    border-color: rgba(255,255,255,0.25);
+  }
+
+  .acc-trigger {
+    width: 100%;
+    background: rgba(255,255,255,0.03);
+    border: none;
+    color: white;
+    padding: 2.5rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: background 0.3s;
+    text-align: left;
+    gap: 2rem;
+  }
+
+  .acc-trigger:hover { background: rgba(255,255,255,0.07); }
+  .acc-item.active .acc-trigger { background: rgba(255,255,255,0.06); }
+
+  .acc-trigger-left {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .acc-num {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 12px;
+    opacity: 0.3;
+    letter-spacing: 0.15em;
+    min-width: 28px;
+  }
+
+  .acc-icon { font-size: 2rem; }
+
+  .acc-title {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(18px, 2.5vw, 32px);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+  }
+
+  .acc-arrow {
+    width: 48px;
+    height: 48px;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    transition: transform 0.4s, background 0.3s, border-color 0.3s;
+    flex-shrink: 0;
+  }
+
+  .acc-item.active .acc-arrow {
+    transform: rotate(45deg);
+    background: var(--red);
+    border-color: var(--red);
+  }
+
+  /* Accordion body */
+  .acc-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .acc-item.active .acc-body {
+    max-height: 1200px;
+  }
+
+  .acc-inner {
+    padding: 0 3rem 3rem;
+  }
+
+  .acc-divider {
+    height: 1px;
+    background: rgba(255,255,255,0.08);
+    margin-bottom: 3rem;
+  }
+
+  .acc-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 3rem;
+  }
+
+  .acc-desc {
+    font-size: 15px;
+    line-height: 1.9;
+    opacity: 0.7;
+    font-weight: 300;
+  }
+
+  .acc-list {
+    list-style: none;
+  }
+
+  .acc-list li {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    font-size: 14px;
+    opacity: 0.75;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .acc-list li::before {
+    content: '→';
+    opacity: 0.4;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+
+  /* Portfolio inside accordion */
+  .acc-portfolio {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .acc-portfolio-item {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    aspect-ratio: 9/16;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .acc-portfolio-item:hover { background: rgba(255,255,255,0.08); }
+
+  .acc-portfolio-item.wide {
+    grid-column: 1 / -1;
+    aspect-ratio: 16/7;
+  }
+
+  .placeholder-inner {
+    text-align: center;
+    opacity: 0.2;
+  }
+
+  .placeholder-inner .big {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(24px, 4vw, 56px);
+    font-weight: 900;
+    display: block;
+    line-height: 1;
+  }
+
+  .placeholder-inner .small {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-top: 0.5rem;
+    display: block;
+    font-family: 'Unbounded', sans-serif;
+  }
+
+  .play-btn {
+    width: 56px; height: 56px;
+    border: 2px solid rgba(255,255,255,0.25);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.8rem;
+  }
+
+  .play-btn::after {
+    content: '';
+    width: 0; height: 0;
+    border-style: solid;
+    border-width: 9px 0 9px 16px;
+    border-color: transparent transparent transparent rgba(255,255,255,0.5);
+    margin-left: 4px;
+  }
+
+  /* PORTFOLIO SECTION */
+  .portfolio-section {
+    position: relative;
+    z-index: 2;
+    padding: 0 6vw 8rem;
+  }
+
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    margin-top: 3rem;
+  }
+
+  .portfolio-item {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    aspect-ratio: 16/9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+  }
+
+  .portfolio-item:hover { background: rgba(255,255,255,0.08); }
+  .portfolio-item:first-child { grid-column: 1/-1; aspect-ratio: 16/6; }
+
+  /* FOOTER */
+  footer {
+    padding: 5rem 6vw 4rem;
+    position: relative;
+    z-index: 2;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .footer-name {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(20px, 3vw, 36px);
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .footer-tg {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+  }
+  .footer-tg:hover { opacity: 1; }
+
+  /* Fade in */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fadeUp 0.7s ease forwards;
+  }
+  @keyframes fadeUp { to { opacity: 1; transform: none; } }
+  .fade-up:nth-child(1) { animation-delay: 0.1s; }
+  .fade-up:nth-child(2) { animation-delay: 0.2s; }
+  .fade-up:nth-child(3) { animation-delay: 0.3s; }
+  .fade-up:nth-child(4) { animation-delay: 0.4s; }
+  .fade-up:nth-child(5) { animation-delay: 0.5s; }
+
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; padding: 5rem 6vw 3rem; text-align: center; }
+    .hero-left { order: -1; }
+    .avatar-wrap { width: 65vw; }
+    .pills { justify-content: center; }
+    .acc-trigger { padding: 1.8rem 1.5rem; }
+    .acc-trigger-left { gap: 1rem; }
+    .acc-inner { padding: 0 1.5rem 2rem; }
+    .acc-content { grid-template-columns: 1fr; gap: 2rem; }
+    .acc-portfolio { grid-template-columns: 1fr; }
+    .acc-portfolio-item.wide { aspect-ratio: 16/9; }
+    .portfolio-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="avatar-wrap fade-up">
+      <img src="avatar.png" alt="Елена Брендон">
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <p class="tag-line fade-up">Контент-мейкер</p>
+    <h1 class="hero-name fade-up">Елена<br>Брендон</h1>
+    <p class="hero-subtitle fade-up">
+      Создаю контент, который смотрят миллионы. 107K подписчиков личного блога. Полный цикл — от идеи до монтажа.
+    </p>
+    <div class="pills fade-up">
+      <span class="pill">SMM</span>
+      <span class="pill">Монтаж видео</span>
+      <span class="pill">Вирусные форматы</span>
+    </div>
+    <a href="https://t.me/lena_brendon" target="_blank" class="tg-btn fade-up">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-2.018 9.51c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.177 14.6l-2.95-.924c-.643-.2-.656-.643.136-.953l11.532-4.448c.537-.194 1.006.131.667.973z"/></svg>
+      Написать в Telegram
+    </a>
+  </div>
+</section>
+
+<!-- ACCORDION -->
+<section class="accordion-section">
+  <p class="section-label">Услуги для бизнеса</p>
+  <div class="accordion">
+
+    <!-- SMM -->
+    <div class="acc-item" id="acc1">
+      <button class="acc-trigger" onclick="toggleAcc('acc1')">
+        <div class="acc-trigger-left">
+          <span class="acc-num">01</span>
+          <span class="acc-icon">📱</span>
+          <span class="acc-title">SMM</span>
+        </div>
+        <div class="acc-arrow">+</div>
+      </button>
+      <div class="acc-body">
+        <div class="acc-inner">
+          <div class="acc-divider"></div>
+          <div class="acc-content">
+            <div class="acc-desc">
+              Помогаю бизнесу выстроить системное присутствие в соцсетях. Анализирую конкурентов, определяю голос бренда, создаю контент, который не просто красиво выглядит — а продаёт.<br><br>
+              Работаю с Instagram, ВКонтакте и Telegram-каналами. Делаю так, чтобы аккаунт рос стабильно, а не рывками.
+            </div>
+            <ul class="acc-list">
+              <li>Стратегия присутствия в соцсетях</li>
+              <li>Контент-план на месяц</li>
+              <li>Написание текстов и подписей</li>
+              <li>Настройка tone of voice бренда</li>
+              <li>Работа с комментариями и аудиторией</li>
+              <li>Аналитика и ежемесячный отчёт</li>
+            </ul>
+          </div>
+          <div class="acc-portfolio">
+            <div class="acc-portfolio-item wide">
+              <div class="placeholder-inner">
+                <span class="big">КЕЙС</span>
+                <span class="small">Вставь скриншот результатов</span>
+              </div>
+            </div>
+            <div class="acc-portfolio-item">
+              <div class="placeholder-inner">
+                <span class="big">01</span>
+                <span class="small">пост / сторис</span>
+              </div>
+            </div>
+            <div class="acc-portfolio-item">
+              <div class="placeholder-inner">
+                <span class="big">02</span>
+                <span class="small">пост / сторис</span>
+              </div>
+            </div>
+            <div class="acc-portfolio-item">
+              <div class="placeholder-inner">
+                <span class="big">03</span>
+                <span class="small">пост / сторис</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- МОНТАЖ -->
+    <div class="acc-item" id="acc2">
+      <button class="acc-trigger" onclick="toggleAcc('acc2')">
+        <div class="acc-trigger-left">
+          <span class="acc-num">02</span>
+          <span class="acc-icon">🎬</span>
+          <span class="acc-title">Монтаж видео</span>
+        </div>
+        <div class="acc-arrow">+</div>
+      </button>
+      <div class="acc-body">
+        <div class="acc-inner">
+          <div class="acc-divider"></div>
+          <div class="acc-content">
+            <div class="acc-desc">
+              Монтирую видео, которые досматривают до конца. Знаю, как удерживать внимание в первые 3 секунды, как строить ритм и где ставить крючки.<br><br>
+              Опыт работы с блогерами, брендами и медиапроектами. Сдаю в срок, без бесконечных правок.
+            </div>
+            <ul class="acc-list">
+              <li>Reels, Shorts, TikTok-формат</li>
+              <li>Монтаж интервью и подкастов</li>
+              <li>Субтитры и анимированные титры</li>
+              <li>Цветокоррекция и саунд-дизайн</li>
+              <li>Вертикальный и горизонтальный формат</li>
+              <li>Адаптация под разные платформы</li>
+            </ul>
+          </div>
+          <div class="acc-portfolio">
+            <div class="acc-portfolio-item">
+              <div class="play-btn"></div>
+              <div class="placeholder-inner">
+                <span class="small">видео 01</span>
+              </div>
+            </div>
+            <div class="acc-portfolio-item">
+              <div class="play-btn"></div>
+              <div class="placeholder-inner">
+                <span class="small">видео 02</span>
+              </div>
+            </div>
+            <div class="acc-portfolio-item">
+              <div class="play-btn"></div>
+              <div class="placeholder-inner">
+                <span class="small">видео 03</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ФОРМАТЫ -->
+    <div class="acc-item" id="acc3">
+      <button class="acc-trigger" onclick="toggleAcc('acc3')">
+        <div class="acc-trigger-left">
+          <span class="acc-num">03</span>
+          <span class="acc-icon">🚀</span>
+          <span class="acc-title">Разработка форматов</span>
+        </div>
+        <div class="acc-arrow">+</div>
+      </button>
+      <div class="acc-body">
+        <div class="acc-inner">
+          <div class="acc-divider"></div>
+          <div class="acc-content">
+            <div class="acc-desc">
+              Создаю форматы контента, которые становятся узнаваемыми и масштабируемыми. Слежу за трендами раньше, чем они заходят в массы — и адаптирую их под конкретный бренд органично.<br><br>
+              Результат — не разовый вирусный ролик, а система, которую можно воспроизводить снова и снова.
+            </div>
+            <ul class="acc-list">
+              <li>Вирусные механики под платформу</li>
+              <li>Форматы для регулярного контента</li>
+              <li>UGC-стратегии для брендов</li>
+              <li>Тренд-ресёрч и адаптация</li>
+              <li>Тестирование гипотез</li>
+              <li>Итерации на основе аналитики</li>
+            </ul>
+          </div>
+          <div class="acc-portfolio">
+            <div class="acc-portfolio-item wide">
+              <div class="placeholder-inner">
+                <span class="big">КЕЙС</span>
+                <span class="small">Вставь пример формата</span>
+              </div>
+            </div>
+            <div class="acc-portfolio-item">
+              <div class="play-btn"></div>
+              <div class="placeholder-inner">
+                <span class="small">пример 01</span>
+              </div>
+            </div>
+            <div class="acc-portfolio-item">
+              <div class="play-btn"></div>
+              <div class="placeholder-inner">
+                <span class="small">пример 02</span>
+              </div>
+            </div>
+            <div class="acc-portfolio-item">
+              <div class="play-btn"></div>
+              <div class="placeholder-inner">
+                <span class="small">пример 03</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- GENERAL PORTFOLIO -->
+<section class="portfolio-section">
+  <p class="section-label">Общее портфолио</p>
+  <div class="portfolio-grid">
+    <div class="portfolio-item">
+      <div class="placeholder-inner" style="opacity:0.2">
+        <span class="big" style="font-family:'Unbounded',sans-serif;font-size:clamp(32px,5vw,72px);font-weight:900;display:block">ЛУЧШАЯ РАБОТА</span>
+        <span class="small" style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;margin-top:0.5rem;display:block;font-family:'Unbounded',sans-serif">вставь главный кейс</span>
+      </div>
+    </div>
+    <div class="portfolio-item">
+      <div class="placeholder-inner" style="opacity:0.2">
+        <span class="big" style="font-family:'Unbounded',sans-serif;font-size:clamp(32px,4vw,60px);font-weight:900;display:block">01</span>
+      </div>
+    </div>
+    <div class="portfolio-item">
+      <div class="placeholder-inner" style="opacity:0.2">
+        <span class="big" style="font-family:'Unbounded',sans-serif;font-size:clamp(32px,4vw,60px);font-weight:900;display:block">02</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">Елена Брендон</div>
+  <a href="https://t.me/lena_brendon" target="_blank" class="footer-tg">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-2.018 9.51c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.177 14.6l-2.95-.924c-.643-.2-.656-.643.136-.953l11.532-4.448c.537-.194 1.006.131.667.973z"/></svg>
+    @lena_brendon
+  </a>
+</footer>
+
+<script>
+  function toggleAcc(id) {
+    const item = document.getElementById(id);
+    const isOpen = item.classList.contains('active');
+    document.querySelectorAll('.acc-item').forEach(i => i.classList.remove('active'));
+    if (!isOpen) {
+      item.classList.add('active');
+      setTimeout(() => item.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+    }
+  }
+</script>
+</body>
+</html>
